@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 const config: AxiosRequestConfig = {
-  withCredentials: true,
   // headers: {
   //   'locale': 'ko',
   // },
