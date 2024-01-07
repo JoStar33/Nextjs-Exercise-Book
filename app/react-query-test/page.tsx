@@ -1,32 +1,30 @@
-'use client';
-
-import { Hydrate, dehydrate } from 'react-query';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import getMovie from '@/apis/movie';
 import queryKeys from '@/constants/queryKeys';
 import getQueryClient from '@/utils/getClientQuery';
+import ReactQueryTestContainer from '@/containers/react-query-test';
 
-const queryClient = getQueryClient();
-
-async function getMovieList() {
-  const fetchMovieList = async ({ pageParam = 1 }) => {
-    const response = getMovie(pageParam);
-    return response;
-  };
-
-  try {
-    await queryClient.prefetchInfiniteQuery(
-      [queryKeys.movieList],
-      fetchMovieList,
-    );
-  } catch (error) {
-    console.log(error);
-  } finally {
-    queryClient.clear();
-  }
+async function fetchMovieList({ pageParam = 1 }) {
+  const response = await getMovie({ page: pageParam });
+  return response;
 }
 
-export default function ReactQueryTestPagePage() {
-  getMovieList();
+export default async function ReactQueryTestPagePage() {
+  const queryClient = getQueryClient();
 
-  return <Hydrate state={dehydrate(queryClient)} />;
+  try {
+    await queryClient.prefetchInfiniteQuery({
+      queryKey: [queryKeys.movieList],
+      queryFn: fetchMovieList,
+      initialPageParam: 1,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <ReactQueryTestContainer />
+    </HydrationBoundary>
+  );
 }

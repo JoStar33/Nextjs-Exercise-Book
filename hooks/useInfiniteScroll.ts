@@ -1,23 +1,15 @@
-import {
-  InfiniteData,
-  QueryKey,
-  UseInfiniteQueryOptions,
-  useInfiniteQuery,
-} from 'react-query';
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
 export interface IUseInfiniteScroll {
   queryKey: any[];
   requestAPI: (...arg: any) => Promise<any>;
-  options: Omit<
-    UseInfiniteQueryOptions<any, unknown, any, any, QueryKey>,
-    'queryKey' | 'queryFn'
-  >;
-  requestQuery: object;
+  options: any;
+  requestQuery?: object;
 }
 
 export default function useInfiniteScroll<T extends { page_number: number }>({
   requestAPI,
-  requestQuery,
+  requestQuery = {},
   queryKey,
   options,
 }: IUseInfiniteScroll): {
@@ -35,10 +27,6 @@ export default function useInfiniteScroll<T extends { page_number: number }>({
     return res;
   };
 
-  const OPTION = {
-    ...options,
-  };
-
   const {
     data,
     fetchNextPage,
@@ -48,11 +36,13 @@ export default function useInfiniteScroll<T extends { page_number: number }>({
     isFetching,
     isError,
     refetch,
-  } = useInfiniteQuery<T>(queryKey, ({ pageParam }) => fetchUrl(pageParam), {
-    getNextPageParam: (lastPage) => {
+  } = useInfiniteQuery<T>({
+    ...options,
+    queryKey,
+    queryFn: ({ pageParam = 1 }: { pageParam: any }) => fetchUrl(pageParam),
+    getNextPageParam: (lastPage: { page_number: number }) => {
       return lastPage.page_number + 1;
     },
-    ...OPTION,
   });
 
   return {

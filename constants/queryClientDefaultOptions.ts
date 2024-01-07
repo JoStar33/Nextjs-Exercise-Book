@@ -1,15 +1,10 @@
-import { QueryClientConfig } from 'react-query';
-
-const queryClientDefaultOptions: QueryClientConfig = {
+const queryClientDefaultOptions = {
   defaultOptions: {
     queries: {
-      refetchOnMount: true,
-      refetchOnReconnect: true,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
       refetchOnWindowFocus: false,
       retry: false,
-      suspense: false,
-      useErrorBoundary: false,
-      keepPreviousData: true,
     },
   },
 } as const;
