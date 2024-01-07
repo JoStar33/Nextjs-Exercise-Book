@@ -1,4 +1,4 @@
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { dehydrate, Hydrate } from '@tanstack/react-query';
 import getMovie from '@/apis/movie';
 import queryKeys from '@/constants/queryKeys';
 import getQueryClient from '@/utils/getClientQuery';
@@ -16,18 +16,17 @@ export default async function ReactQueryTestPagePage() {
 
   // App Route 방식에서는 react-query와 정적 파일 생성을 혼합해서 사용할 경우, 아래와 같이 작성해야함.
   try {
-    await queryClient.prefetchInfiniteQuery({
-      queryKey: [queryKeys.movieList],
-      queryFn: fetchMovieList,
-      initialPageParam: 1,
-    });
+    await queryClient.prefetchInfiniteQuery(
+      [queryKeys.movieList],
+      fetchMovieList,
+    );
   } catch (error) {
     console.log(error);
   }
   // 하이드레이션으로 감싼후 state에 dehydrate한 후 전달.(건조)
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
+    <Hydrate state={dehydrate(queryClient)}>
       <ReactQueryTestContainer />
-    </HydrationBoundary>
+    </Hydrate>
   );
 }
