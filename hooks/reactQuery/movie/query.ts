@@ -8,14 +8,15 @@ import getMovie from '@/apis/movie';
 import queryKeys from '@/constants/queryKeys';
 
 const useGetInfiniteMovie = (
-  options?: UseInfiniteQueryOptions<Promise<MovieList>, AxiosError, MovieList>,
+  options?: UseInfiniteQueryOptions<MovieList, AxiosError, MovieList>,
 ) =>
-  useInfiniteQuery<Promise<MovieList>, AxiosError, MovieList>(
+  useInfiniteQuery<MovieList, AxiosError, MovieList>(
     [queryKeys.movieList],
     ({ pageParam = 1 }) => getMovie({ page: pageParam }),
     {
-      getNextPageParam: async (lastPage) => {
-        return (await lastPage).page_number + 1;
+      getNextPageParam: (lastPage) => {
+        const response = lastPage;
+        return response.page_number + 1;
       },
       ...options,
     },
