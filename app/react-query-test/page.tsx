@@ -1,4 +1,4 @@
-import getMovie from '@/apis/movie';
+import { getMovie } from '@/apis/movie';
 import queryKeys from '@/constants/queryKeys';
 import ReactQueryTestContainer from '@/containers/react-query-test';
 import HydrateProvider from '@/providers/HydrateProvider';

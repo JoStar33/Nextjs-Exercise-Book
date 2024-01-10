@@ -5,6 +5,10 @@ interface MovieList {
   movies: Movie[];
 }
 
+interface MovieDetail {
+  movie: Movie;
+}
+
 interface Movie {
   id: number;
   url: string;
@@ -34,4 +38,4 @@ interface Movie {
   date_uploaded_unix: number;
 }
 
-export type { MovieList, Movie };
+export type { MovieList, MovieDetail, Movie };

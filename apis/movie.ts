@@ -1,6 +1,6 @@
 import API from '@/constants/path';
 import instance from '.';
-import { MovieList } from '@/types/movie';
+import { MovieDetail, MovieList } from '@/types/movie';
 
 const getMovie = async ({ page }: { page: number }) => {
   const res = await instance.get(`${API.MOVIE}?page=${page}`);
@@ -8,4 +8,10 @@ const getMovie = async ({ page }: { page: number }) => {
   return data;
 };
 
-export default getMovie;
+const getMovieDetail = async (id: number) => {
+  const res = await instance.get(`${API.MOVIE_DETAIL}?movie_id=${id}`);
+  const { data }: { data: MovieDetail } = res.data;
+  return data;
+};
+
+export { getMovie, getMovieDetail };

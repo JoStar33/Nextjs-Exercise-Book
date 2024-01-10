@@ -1,7 +1,7 @@
 'use client';
 
 import ReactQueryTest from '@/components/react-query-test';
-import useGetInfiniteMovie from '@/hooks/reactQuery/movie/query';
+import { useGetInfiniteMovie } from '@/hooks/reactQuery/movie/query';
 
 const TEN_MINUTES = 10 * 60 * 1000;
 

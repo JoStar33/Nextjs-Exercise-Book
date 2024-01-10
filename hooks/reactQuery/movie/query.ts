@@ -1,10 +1,11 @@
 import {
   useInfiniteQuery,
   UseInfiniteQueryOptions,
+  useQuery,
 } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { MovieList } from '@/types/movie';
-import getMovie from '@/apis/movie';
+import { MovieDetail, MovieList } from '@/types/movie';
+import { getMovie, getMovieDetail } from '@/apis/movie';
 import queryKeys from '@/constants/queryKeys';
 
 const useGetInfiniteMovie = (
@@ -22,4 +23,9 @@ const useGetInfiniteMovie = (
     },
   );
 
-export default useGetInfiniteMovie;
+const useGetMovieDetail = (movieId: number) =>
+  useQuery<MovieDetail>([queryKeys.movieDetail, movieId], () =>
+    getMovieDetail(movieId),
+  );
+
+export { useGetInfiniteMovie, useGetMovieDetail };
