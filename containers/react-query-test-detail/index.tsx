@@ -1,5 +1,6 @@
 'use client';
 
+import ReactQueryTestDetail from '@/components/react-query-test-detail';
 import { useGetMovieDetail } from '@/hooks/reactQuery/movie/query';
 
 interface IReactQueryTestDetailContainer {
@@ -10,5 +11,5 @@ export default function ReactQueryTestDetailContainer({
   movieId,
 }: IReactQueryTestDetailContainer) {
   const { data } = useGetMovieDetail(movieId);
-  return <div>{data?.movie.title}</div>;
+  return <ReactQueryTestDetail movie={data} />;
 }
