@@ -3,10 +3,5 @@ interface Props {
 }
 
 export default function Layout({ children }: Props) {
-  return (
-    <>
-      <div>레이아웃 구성</div>
-      {children}
-    </>
-  );
+  return <>layout 모바일 레이아웃!!!!!!{children}</>;
 }
