@@ -1,0 +1,14 @@
+.server_container {
+  width: 300px;
+  height: 300px;
+  border-radius: 20px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.server_container__text {
+  font-size: 15px;
+  font-weight: 800;
+}

@@ -1,4 +1,5 @@
 import { getMovieDetail } from '@/apis/movie';
+import ServerComponent from '@/components/common/ServerComponent';
 import queryKeys from '@/constants/queryKeys';
 import ReactQueryTestDetailContainer from '@/containers/react-query-test-detail';
 import HydrateProvider from '@/providers/HydrateProvider';
@@ -19,6 +20,7 @@ export default async function ReactQueryTestDetailPage({
       queryFn={() => getMovieDetail(computedPath)}
       queryKey={[queryKeys.movieDetail, computedPath]}
     >
+      <ServerComponent />
       <ReactQueryTestDetailContainer movieId={computedPath} />
     </HydrateProvider>
   );
