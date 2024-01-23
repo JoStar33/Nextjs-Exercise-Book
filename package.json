@@ -11,13 +11,18 @@
   "dependencies": {
     "@tanstack/react-query": "^4.36.1",
     "@tanstack/react-query-devtools": "^4.33.0",
+    "accept-language": "^3.0.18",
     "axios": "^1.6.5",
     "babel-plugin-styled-components": "^2.1.4",
     "cz-customizable": "^7.0.0",
+    "i18next": "^23.7.18",
+    "i18next-resources-to-backend": "^1.2.0",
     "next": "14.0.4",
+    "next-i18next": "^15.2.0",
     "next-seo": "^6.4.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-i18next": "^14.0.1",
     "react-infinite-scroller": "^1.2.6",
     "styled-components": "^6.1.6",
     "styled-reset": "^4.5.2"
