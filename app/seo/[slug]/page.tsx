@@ -40,6 +40,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const TEN_MINUTES = 10 * 60 * 1000;
 
+export async function generateStaticParams() {
+  return [];
+}
+
 // 근데 결론적으로 난 generateMetadata가 있다고 한들 아래 방식을 통해 SEO 최적화를 하는걸 선호할듯하다.
 // 위에 형태로 메타태그를 생성하면 불필요하게 API통신을 두번하는 꼴이 된다. 따라서 서버에 큰 부담을 줄수도 있기에 좋지못하다.
 export default async function SeoDetailPage({ params }: Props) {
