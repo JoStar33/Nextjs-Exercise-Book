@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "commit": "./node_modules/cz-customizable/standalone.js"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.36.1",
