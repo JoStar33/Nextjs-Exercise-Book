@@ -4,6 +4,7 @@ import './globals.css';
 import React from 'react';
 import QueryProvider from '@/providers/QueryProvider';
 import StyledComponentsRegistry from '@/libs/StyledComponentsRegistry';
+import { themeClass } from '@/styles/theme.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${themeClass}`}>
         <StyledComponentsRegistry>
           <QueryProvider>{children}</QueryProvider>
         </StyledComponentsRegistry>

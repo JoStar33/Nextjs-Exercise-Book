@@ -1,7 +1,5 @@
-'use client';
-
 import React from 'react';
-import S from './layout.style';
+import appLayoutStyle from './layout.css';
 
 interface Props {
   children: React.ReactNode;
@@ -9,10 +7,10 @@ interface Props {
 
 export default function AppRouterPageLayout({ children }: Props) {
   return (
-    <S.AppRouterPageLayout>
-      <div className="header" />
-      <div className="body">{children}</div>
-      <div className="bottom" />
-    </S.AppRouterPageLayout>
+    <div className={appLayoutStyle.main}>
+      <div className={appLayoutStyle.header} />
+      <div className={appLayoutStyle.body}>{children}</div>
+      <div className={appLayoutStyle.bottom} />
+    </div>
   );
 }

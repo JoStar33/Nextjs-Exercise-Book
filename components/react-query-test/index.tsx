@@ -7,8 +7,8 @@ import {
 import InfiniteScroll from 'react-infinite-scroller';
 import { AxiosError } from 'axios';
 import Image from 'next/image';
-import S from './ReactQueryTest.style';
 import { MovieList } from '@/types/movie';
+import reactQueryTestStyle from './ReactQueryTest.css';
 
 interface Props {
   data?: InfiniteData<MovieList>;
@@ -24,7 +24,7 @@ export default function ReactQueryTest({
   fetchNextPage,
 }: Props) {
   return (
-    <S.ReactQueryTest>
+    <div className={reactQueryTestStyle.main}>
       <InfiniteScroll
         className="infinite-scroll-wrapper"
         loadMore={() => {
@@ -35,20 +35,21 @@ export default function ReactQueryTest({
       >
         {data?.pages.map((element) =>
           element.movies.map((movie) => (
-            <div className="card" key={movie.id}>
+            <div className={reactQueryTestStyle.card} key={movie.id}>
               <Image
                 width={300}
                 height={300}
                 src={movie.background_image_original}
                 alt="영화 이미지"
+                className={reactQueryTestStyle.cardImage}
               />
-              <div className="card-info__container">
+              <div className={reactQueryTestStyle.cardInfoContainer}>
                 <h4>{movie.title}</h4>
               </div>
             </div>
           )),
         )}
       </InfiniteScroll>
-    </S.ReactQueryTest>
+    </div>
   );
 }
