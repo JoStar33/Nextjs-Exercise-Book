@@ -1,9 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
   const { method, body } = req;
 
   // 포스트만 사용가능
