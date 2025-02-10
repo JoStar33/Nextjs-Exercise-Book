@@ -1,7 +1,7 @@
-'use client';
-
 import ReactQueryTestDetail from '@/components/react-query-test-detail';
-import { useGetMovieDetail } from '@/hooks/reactQuery/movie/query';
+import queryKeys from '@/constants/queryKeys';
+import { MovieDetail } from '@/types/movie';
+import getQueryClient from '@/utils/getClientQuery';
 
 interface IReactQueryTestDetailContainer {
   movieId: number;
@@ -10,6 +10,11 @@ interface IReactQueryTestDetailContainer {
 export default function ReactQueryTestDetailContainer({
   movieId,
 }: IReactQueryTestDetailContainer) {
-  const { data } = useGetMovieDetail(movieId);
+  const queryClient = getQueryClient();
+  const data = queryClient.getQueryData<MovieDetail>([
+    queryKeys.movieDetail,
+    movieId,
+  ]);
+
   return <ReactQueryTestDetail movie={data} />;
 }
