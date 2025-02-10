@@ -1,6 +1,7 @@
 module.exports = {
   types: [
     { value: '✨ feat', name: '✨ feat:\t새로운 기능 추가' },
+    { value: '🔨 update', name: '🔨 update:\t기능 수정' },
     { value: '🐛 fix', name: '🐛 fix:\t버그 수정' },
     { value: '📝 docs', name: '📝 docs:\t리드미 수정' },
     { value: '💅 design', name: '💅 design:\tUI, UX 관련 코드 수정' },
