@@ -1,33 +1,46 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { revalidatePath } from 'next/cache';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-  const { method, body } = req;
+export async function POST(req: NextRequest) {
+  const { method, body } = await req.json();
 
   // 포스트만 사용가능
   if (method !== 'POST') {
-    return res
-      .status(400)
-      .json({ error: 'Invalid HTTP method. Only POST method is allowed.' });
+    return NextResponse.json(
+      {
+        error: 'Invalid HTTP method. Only POST method is allowed.',
+      },
+      { status: 400 },
+    );
   }
 
   try {
     if (!body) {
-      return res.status(400).send('Bad reqeust (no body)');
+      return NextResponse.json(
+        { error: 'Bad reqeust (no body)' },
+        { status: 400 },
+      );
     }
 
-    const idToRevalidate = body.id;
+    const idToRevalidate = await req.json();
     // seo 페이지와 seo 상세페이지를 재생성한다.
     /**
      * Revalidate a specific page and regenerate it using On-Demand Incremental Static Regeneration.
      * The path should be an actual path, not a rewritten path. E.g. for "/blog/[slug]" this should be "/blog/post-1".
      */
     if (idToRevalidate) {
-      await res.revalidate('/seo');
-      await res.revalidate(`/seo/${idToRevalidate}`);
-      return res.json({ revalidated: true });
+      revalidatePath('/seo');
+      revalidatePath(`/seo/${idToRevalidate}`);
+      return NextResponse.json({ revalidated: true });
     }
   } catch (err) {
-    return res.status(500).send('Error while revalidating');
+    return NextResponse.json(
+      { error: 'Error while revalidating' },
+      { status: 500 },
+    );
   }
-  return res.status(500).send('Error while revalidating');
+  return NextResponse.json(
+    { error: 'Error while revalidating' },
+    { status: 500 },
+  );
 }
